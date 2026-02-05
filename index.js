@@ -1,19 +1,27 @@
-//esto es como POM, aqui sepramos instancias del servidor de la lógica de rutas (account.js
-//practicamente separas dónde ocurren las cosas de qué cosas ocurren.
 import dotenv from "dotenv";
-dotenv.config();
-import express from "express"; // Importación limpia
+import express from "express";
 import accountRouter from "./routes/account.js";
 import authRouter from "./routes/auth.js";
+import authTokenRouter from "./routes/auth_token.js";
+import authSessionRouter from "./routes/auth_session.js";
+import cookieParser from "cookie-parser";
 
-const expressApp = express();         // Instancia de la app
-const PORT = process.env.PORT; //normalmente va con variables de entorno
 
+dotenv.config();
+
+const PORT = process.env.PORT;
+const expressApp = express();
+//middlewares
+expressApp.use(cookieParser());
 expressApp.use(express.json());
 expressApp.use(express.text());
-//limpieza de código. evitamos repetir la ruta en todo los scripts, ademas de hacerlo legible
+
 expressApp.use('/cuenta', accountRouter);
-expressApp.use('/auth', authRouter)
+
+expressApp.use('/auth', authRouter);
+
+expressApp.use("/auth-token", authTokenRouter);
+expressApp.use("/auth-session", authSessionRouter);
 
 
 expressApp.listen(PORT, () => {

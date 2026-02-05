@@ -1,10 +1,19 @@
+import { USER_BBDD } from "../bbdd.js";
 const authByEmailPwd = (email, password) => {
-    const user = USER_BBDD.filter((user) => user.email === email);
-    if (!user) throw new Error();
-    if (user.password !== password) throw new Error();
+    const user = USER_BBDD.find((user) => user.email === email);
+    if (!user) throw new Error('usuario no encontrado');
+    if (user.password !== password) throw new Error('contraseña incorrecta');
+    // Agregamos una validación de rol para cuando necesites 403
+    // if (user.role !== 'admin') throw new Error('permisos insuficientes');
+
     return user;
+    //este user es neceseario retornarlo por que lo vamos a usar en auth session, y token session,
+    //aqui usamos throw new Error porque es sincrono, es decir la BBDD esta aqui, en la ram, por tanto
+    //  no tiene que eseprar una repsuesta, de lo contrario serai (error)=>Promise.reject(error)   porque esperaria una promesa
 }
 export default authByEmailPwd;
+
+
 
 // authRouter.post('Autenticacion', (req, res) => {
 //     //extaremos los datos que vamos a validar
