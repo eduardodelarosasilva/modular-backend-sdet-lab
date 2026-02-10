@@ -16,15 +16,19 @@ accountRouter.get('/', (req, res) => {
     res.send('<h1>¡Bienvenido a mi Servidor Pro!</h1><p>Prueba ir a /cuenta/juan/123</p>');
 });
 
-accountRouter.get('/cuenta/:guid', (req, res) => {
+accountRouter.get('/:guid', (req, res) => {
     const { guid } = req.params;
     const user = USER_BBDD.find((user) => user.guid === req.params.guid)
 
-    if (!user) return req.status(404).send();
+    //el return es una medida de seguridad (fail-fast). Te asegura que, en cuanto detectas que algo falta o está mal, cortas el flujo y sales de ahí.
+    //o que configuraste algo correctamente y terminast.(el superheore de POM)
+    if (!user) return res.status(404).send();//osea con return paramos aqui, y no hacemos el return de abajo
+    //no necesitamos "return" si es la última línea, 
+    // pero ayuda visualmente a saber que aquí termina el flujo.
     return res.send(user);
 });
 //extraemos el  guid y name del body p/validar
-accountRouter.post('/cuenta/:guid', (req, res) => {
+accountRouter.post('/:guid', (req, res) => {
     const { guid, name } = req.body
     //si no hay guid ni name en body entonces es bad request 
     if (!guid || !name) return res.status(400).send();
@@ -41,7 +45,7 @@ accountRouter.post('/cuenta/:guid', (req, res) => {
 
 })
 //actualizar el nombre de una cuenta
-accountRouter.patch('/cuenta/:guid', (req, res) => {
+accountRouter.patch('/:guid', (req, res) => {
     const { guid } = req.params;
     const { name } = req.body
 
@@ -58,7 +62,7 @@ accountRouter.patch('/cuenta/:guid', (req, res) => {
         usuario_actualizado: user
     });
 })
-accountRouter.delete('/cuenta/:guid', (req, res) => {
+accountRouter.delete('/:guid', (req, res) => {
     const { guid } = req.params;   // aqui 
     const userIndex = USER_BBDD.findIndex((user) => user.guid === guid); // 1. Buscamos el ÍNDICE (la posición en el array)
     // 2. Si findIndex devuelve -1, es que no lo encontró(debe devolver "0" osea 1 elemento encontrado ..match)

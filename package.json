@@ -1,19 +1,28 @@
 {
+  "name": "mi-backend-node",
+  "version": "1.0.0",
+  "description": "API de aprendizaje para SDET",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "jest"
+  },
   "dependencies": {
-    "cookie-parser": "^1.4.7",
+    "cookie-parser": "1.4.7",
     "dotenv": "17.2.3",
     "express": "5.2.1",
-    "nanoid": "^5.1.6"
+    "helmet": "8.1.0",
+    "morgan": "1.10.1",
+    "nanoid": "5.1.6",
+    "uuid": "13.0.0"
   },
-  "name": "express",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
   "devDependencies": {
-    "dev": "nodemon ./index.js"
+    "nodemon": "^3.1.0",
+    "jest": "^29.7.0"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "type": "module"
+  "license": "ISC"
 }

@@ -1,18 +1,16 @@
 import { Router } from 'express';
-import { USER_BBDD } from '../bbdd.js';
 import authByEmailPwd from '../helpers/auth-by-email-pwd.js';
 
 const authRouter = Router();
 
 //endpoint public (no necesita autenticacion ni autorizacion)
-authRouter.get('publico', (req, res) => res.send('Endpoint Publico'));
+authRouter.get('/publica', (req, res) => res.send('Endpoint Publico'));
 
 //endpoint autenticado para ususarios 
 authRouter.post('Autenticacion', (req, res) => {
     //extaremos los datos que vamos a validar con destructuring (Desestructuración de Objetos.)
     const { email, password } = req.body;
     // "aqui node va  al objeto req.body, busca esas propiedades, las extrae y crea dos constantes nuevas con esos mismos nombres y valores".
-
     //validamos que tenga credenciales(no autenticado)
     if (!email || !password) return res.status(400).send();
     try {

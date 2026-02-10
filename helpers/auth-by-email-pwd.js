@@ -15,17 +15,22 @@ export default authByEmailPwd;
 
 
 
-// authRouter.post('Autenticacion', (req, res) => {
-//     //extaremos los datos que vamos a validar
-//     const { email, password } = req.body;
-//     //validamos que tenga credenciales(no autenticado)
-//     if (!email || !password) return res.status(400).send();
-//     //Vvalidamos que el email proporcionado coincide con ls DB
-//     const user = USER_BBDD.filter((user) => user.email === email);
-//     //si no hay ususario lo rechazamos
-//     if (!user) return res.status(401).send();
-//     // SI NO HAY PASSWORD  no esta autorizado
-//     if (user.password !== password) return res.status(401).send();
-//     //madnamos mensajed de autenticacion
-//     res.send(`Usuario ${user.name} autenticado`)
-// });
+// function increment(x) {
+//     x++
+// }
+// let num = 5
+// increment(num);
+// console.log(num);
+
+//aqui pasamos por referencia(pasamos todo el objeto)
+// function increment(obj) {
+//     object.num++;
+// }
+// let object = {num: 5};
+// increment(object);
+// console.log(object);
+
+// En JS, los objetos no se guardan directamente en la variable. La variable solo guarda una dirección de
+// memoria (un puntero). Al pasar miObjeto a la función, estás pasando la dirección. Por eso, cualquier cambio
+//  dentro del objeto afecta a la instancia original.
+
